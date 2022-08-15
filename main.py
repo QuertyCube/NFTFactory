@@ -18,7 +18,6 @@ from datetime import datetime
 import create_collectible
 
 import webbrowser
-# importing datetime module
 import datetime
 import time
 import brownie.project as project
@@ -31,14 +30,14 @@ import requests
 
 
 
-
+#ganti jadi Nama folder, exp nama folder NFTFactory:      p = project.load(r'D:\Collage\ScriptSweat\Proj\NFTFactory', name="NftfactoryProject")
 p = project.load(r'D:\Collage\ScriptSweat\Proj\NFTFactory', name="NftfactoryProject")
 p.load_config()
 network.connect('rinkeby')
 
 contract_addr='0xab38F479fFbDC478D6083D5FE09078a46dfb8C93'
-adrees ="0x5A115b5B53Afe169C3357dD5CC3a70Df3D8F82D0"
-kunci="13e4b91edf3a14ddb2793b6ac01be5155b5b2e56ea3cdf3ec59752121061a77a"
+adrees ="mg8"
+kunci="74u"
 maxsizefile ="The allowed file size is 20MB.\nPlease reselect the file."
 size_file_max = 20971520
 
@@ -163,11 +162,9 @@ class FormImage(QDialog):
         if fname != "":
             info = QFileInfo(fname[0])
             sizenya=info.size()
-            # print(sizenya)
             if sizenya < size_file_max:  #jika file < 20 MB
                 self.lineEdit_loc_file.setText(fname[0])
                 self.file_extension = os.path.splitext(fname[0])[1][1:]  #dapetin png (bukan .png)
-                # self.lineEdit_loc_file.setText(file_extension)  
             else:
                 self.show_popup("Warning",maxsizefile,"")
     hasi="www.google.com"
@@ -324,7 +321,6 @@ class FormVideo(QDialog):
             if sizenya <size_file_max:  #jika file < 20 MB
                 self.lineEdit_loc_file.setText(fname[0])
                 self.file_extension = os.path.splitext(fname[0])[1][1:]  #dapetin png (bukan .png)
-                # self.lineEdit_loc_file.setText(file_extension)  
             else:
                 self.show_popup("Warning",maxsizefile,"")
     hasi="www.google.com"
@@ -491,9 +487,6 @@ class FormDocument(QDialog):
                 self.unix_fcreated= int(os.path.getctime(fname[0]))
                 print("self unix : "+str(self.unix_fcreated))
                 self.lineEdit_datecreated.setText(datetime.datetime.fromtimestamp(self.unix_fcreated, datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S'))  #time nya local
-
-
-                # self.lineEdit_loc_file.setText(file_extension)  
             else:
                 self.show_popup("Warning",maxsizefile,"")
     hasi=""
@@ -816,7 +809,6 @@ class FormSound(QDialog):
             if sizenya <size_file_max:  #jika file < 20 MB
                 self.lineEdit_loc_file.setText(fname[0])
                 self.file_extension = os.path.splitext(fname[0])[1][1:]  #dapetin png (bukan .png)
-                # self.lineEdit_loc_file.setText(file_extension)  
             else:
                 self.show_popup("Warning",maxsizefile,"")
     hasi="www.google.com"
@@ -980,11 +972,10 @@ class FormOther(QDialog):
         if fname != "":
             info = QFileInfo(fname[0])
             sizenya=info.size()
-            # print(sizenya)
             if sizenya <size_file_max:  #jika file < 20 MB
                 self.lineEdit_loc_file.setText(fname[0])
                 self.file_extension = os.path.splitext(fname[0])[1][1:]  #dapetin png (bukan .png)
-                # self.lineEdit_loc_file.setText(file_extension)  
+
             else:
                 self.show_popup("Warning",maxsizefile,"")
     hasi="www.google.com"
@@ -1125,12 +1116,6 @@ class LoadForm(QThread):
 
     def run(self):
         wallet_addr = str(accounts.add(kunci))
-        # url = "https://testnets-api.opensea.io/api/v1/assets?owner={}&order_direction=desc&offset=0&limit=200".format(wallet_addr)
-        # response = requests.request("GET", url)
-        # ebet=response.json()
-        # row=0
-        # self.jumlah_sinyall.emit(len(ebet['assets']))
-
 
         api_get_nft_from_wallet_spec_addr='https://api-rinkeby.etherscan.io/api?module=account&action=tokennfttx&contractaddress={}&address={}&page=1&offset=100&startblock=0&endblock=27025780&sort=desc&apikey=YK3FX65I3DCB1BS92WFPCZFKB67P6W43DG'.format(contract_addr,wallet_addr)
         abi='[{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"approved","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"operator","type":"address"},{"indexed":false,"internalType":"bool","name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":true,"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"baseURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"string","name":"tokenURI","type":"string"}],"name":"createCollectible","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"},{"internalType":"bytes","name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"address","name":"operator","type":"address"},{"internalType":"bool","name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"bytes4","name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"tokenCounter","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"uint256","name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"stateMutability":"nonpayable","type":"function"}]'
@@ -1138,141 +1123,155 @@ class LoadForm(QThread):
         w3 = Web3(HTTPProvider("https://rinkeby.infura.io/v3/88704d0c3a364cf1b3e46d9e5173a57f"))
         hdr = {"User-Agent": "My Agent"}
 
+        
+
+
         with urllib.request.urlopen(api_get_nft_from_wallet_spec_addr) as url:
             ebet = json.loads(url.read().decode())
-            # print(data["result"])
+
         escrow = w3.eth.contract(address='0x411703674217d706D055a4740771dc62C0c27054', abi=abi)
-        xtract_api=[]
         linkrul=""
         row=0
-        self.jumlah_sinyall.emit(len(ebet['result']))
 
 
+        if ebet['status'] == "1":
 
-        # for i in ebet['assets']:
-        for i in ebet['result']:
-            # print("token id: "+i["token_id"])
-            # self.new_signal.emit(row, 0, i["token_id"])
-            # ur=i["token_metadata"]
-            # respons = requests.request("GET", ur)
+            self.jumlah_sinyall.emit(len(ebet['result']))
+            print("sono")
 
-            self.new_signal.emit(row, 0, i["tokenID"])
-            tx = w3.eth.get_transaction(str(i["hash"]))
-            func_obj, func_params = escrow.decode_function_input(tx["input"])
-            try:
-                # ebet2=respons.json()
+            for i in ebet['result']:
 
-                linkrul =str(func_params["tokenURI"])
-
-                req = requests.get(linkrul, headers=hdr)
-                text=req.text
-                ebet2=json.loads(text)
-
-                print(ebet2["name"])
-                self.new_signal.emit(row, 1, ebet2["name"])
-                self.new_signal.emit(row, 2, ebet2["description"])
-                print(ebet2["description"])
-
-
+                self.new_signal.emit(row, 0, i["tokenID"])
+                self.new_signal.emit(row, 12, ("https://rinkeby.etherscan.io/tx/"+i["hash"]))
+                tx = w3.eth.get_transaction(str(i["hash"]))
+                func_obj, func_params = escrow.decode_function_input(tx["input"])
                 try:
-                    if ebet2["jenis_nft"] =="image":
-                        self.new_signal.emit(row, 4, ebet2["external_url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                        self.new_signal.emit(row, 3, ebet2["image"])
-                        self.new_signal.emit(row, 11, "Image")
-                        print("")
+                    # ebet2=respons.json()
 
-                    elif ebet2["jenis_nft"] =="video":
-                        self.new_signal.emit(row, 3, ebet2["animation_url"])
-                        self.new_signal.emit(row, 4, ebet2["external_url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                        self.new_signal.emit(row, 6, ebet2["creator_name"])
-                        self.new_signal.emit(row, 10, ebet2["image"])
-                        self.new_signal.emit(row, 11, "Video")
+                    linkrul =str(func_params["tokenURI"])
 
-                    elif ebet2["jenis_nft"] =="audio":
-                        self.new_signal.emit(row, 3, ebet2["animation_url"])
-                        self.new_signal.emit(row, 4, ebet2["external_url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                        self.new_signal.emit(row, 6, ebet2["creator_name"])
-                        self.new_signal.emit(row, 7, ebet2["artist_name"])
-                        self.new_signal.emit(row, 10, ebet2["image"])  
-                        self.new_signal.emit(row, 11, "Audio")                    
+                    req = requests.get(linkrul, headers=hdr)
+                    text=req.text
+                    ebet2=json.loads(text)
 
-                    elif ebet2["jenis_nft"] =="domain":
-                        self.new_signal.emit(row, 4, ebet2["url"])
-                        self.new_signal.emit(row, 10, ebet2["image"])
-                        self.new_signal.emit(row, 11, "Domain")
-
-                        for ja in ebet2['attributes']:
-                            if ja["trait_type"]== "Registration Date":
-                                regdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
-                                self.new_signal.emit(row, 8, str(regdate))
-                            if ja["trait_type"]== "Expiration Date":
-                                expdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
-                                self.new_signal.emit(row, 9, str(expdate))
+                    print(ebet2["name"])
+                    self.new_signal.emit(row, 1, ebet2["name"])
+                    self.new_signal.emit(row, 2, ebet2["description"])
+                    print(ebet2["description"])
 
 
-                    elif ebet2["jenis_nft"] =="document":
-                        self.new_signal.emit(row, 3, ebet2["url"])
-                        self.new_signal.emit(row, 4, ebet2["external_url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                        self.new_signal.emit(row, 10, ebet2["image"]) 
-                        self.new_signal.emit(row, 11, "Document")
-                        
+                    try:
+                        if ebet2["jenis_nft"] =="image":
+                            self.new_signal.emit(row, 4, ebet2["external_url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                            self.new_signal.emit(row, 3, ebet2["image"])
+                            self.new_signal.emit(row, 11, "Image")
+                            print("")
 
-                    elif ebet2["jenis_nft"] =="other":
-                        self.new_signal.emit(row, 3, ebet2["url"])
-                        self.new_signal.emit(row, 4, ebet2["external_url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                        self.new_signal.emit(row, 10, ebet2["image"]) 
-                        self.new_signal.emit(row, 11, "Other")
+                        elif ebet2["jenis_nft"] =="video":
+                            self.new_signal.emit(row, 3, ebet2["animation_url"])
+                            self.new_signal.emit(row, 4, ebet2["external_url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                            self.new_signal.emit(row, 6, ebet2["creator_name"])
+                            self.new_signal.emit(row, 10, ebet2["image"])
+                            self.new_signal.emit(row, 11, "Video")
 
+                        elif ebet2["jenis_nft"] =="audio":
+                            self.new_signal.emit(row, 3, ebet2["animation_url"])
+                            self.new_signal.emit(row, 4, ebet2["external_url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                            self.new_signal.emit(row, 6, ebet2["creator_name"])
+                            self.new_signal.emit(row, 7, ebet2["artist_name"])
+                            self.new_signal.emit(row, 10, ebet2["image"])  
+                            self.new_signal.emit(row, 11, "Audio")                    
+
+                        elif ebet2["jenis_nft"] =="domain":
+                            self.new_signal.emit(row, 4, ebet2["url"])
+                            self.new_signal.emit(row, 10, ebet2["image"])
+                            self.new_signal.emit(row, 11, "Domain")
+
+                            for ja in ebet2['attributes']:
+                                if ja["trait_type"]== "Registration Date":
+                                    regdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
+                                    self.new_signal.emit(row, 8, str(regdate))
+                                if ja["trait_type"]== "Expiration Date":
+                                    expdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
+                                    self.new_signal.emit(row, 9, str(expdate))
+
+
+                        elif ebet2["jenis_nft"] =="document":
+                            self.new_signal.emit(row, 3, ebet2["url"])
+                            self.new_signal.emit(row, 4, ebet2["external_url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                            self.new_signal.emit(row, 10, ebet2["image"]) 
+                            self.new_signal.emit(row, 11, "Document")
+                            
+
+                        elif ebet2["jenis_nft"] =="other":
+                            self.new_signal.emit(row, 3, ebet2["url"])
+                            self.new_signal.emit(row, 4, ebet2["external_url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                            self.new_signal.emit(row, 10, ebet2["image"]) 
+                            self.new_signal.emit(row, 11, "Other")
+
+                    except Exception as e:
+                        try:
+                            self.new_signal.emit(row, 3, ebet2["image"])
+                            self.new_signal.emit(row, 4, ebet2["external_url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                            self.new_signal.emit(row, 10, ebet2["image"])
+                        except Exception as e:
+                            print("")
+
+                        try:
+                            self.new_signal.emit(row, 3, ebet2["animation_url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                            self.new_signal.emit(row, 6, ebet2["creator_name"])
+                            self.new_signal.emit(row, 7, ebet2["artist_name"])
+                            
+                        except Exception as e:
+                            print("")
+
+                        try:
+                            self.new_signal.emit(row, 3, ebet2["url"])
+                            self.new_signal.emit(row, 5, ebet2["model_file_type"])
+                        except Exception as e:
+                            print("")
+
+                        try:
+                            for ja in ebet2['attributes']:
+                                if ja["trait_type"]== "Registration Date":
+                                    regdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
+                                    self.new_signal.emit(row, 8, str(regdate))
+                                if ja["trait_type"]== "Expiration Date":
+                                    expdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
+                                    self.new_signal.emit(row, 9, str(expdate))
+                            self.new_signal.emit(row, 3, "")
+                            self.new_signal.emit(row, 10, ebet2["image_url"])
+                            self.new_signal.emit(row, 4, ebet2["url"])
+                        except Exception as e:
+                            print("")
                 except Exception as e:
-                    try:
-                        self.new_signal.emit(row, 3, ebet2["image"])
-                        self.new_signal.emit(row, 4, ebet2["external_url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                        self.new_signal.emit(row, 10, ebet2["image"])
-                    except Exception as e:
-                        print("")
-
-                    try:
-                        self.new_signal.emit(row, 3, ebet2["animation_url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                        self.new_signal.emit(row, 6, ebet2["creator_name"])
-                        self.new_signal.emit(row, 7, ebet2["artist_name"])
-                        
-                    except Exception as e:
-                        print("")
-
-                    try:
-                        self.new_signal.emit(row, 3, ebet2["url"])
-                        self.new_signal.emit(row, 5, ebet2["model_file_type"])
-                    except Exception as e:
-                        print("")
-
-                    try:
-                        for ja in ebet2['attributes']:
-                            if ja["trait_type"]== "Registration Date":
-                                regdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
-                                self.new_signal.emit(row, 8, str(regdate))
-                            if ja["trait_type"]== "Expiration Date":
-                                expdate= datetime.datetime.fromtimestamp(ja["value"], datetime.timezone(datetime.timedelta(hours=7))).strftime('%Y-%m-%d %H:%M:%S')  #time nya local
-                                self.new_signal.emit(row, 9, str(expdate))
-                        self.new_signal.emit(row, 3, "")
-                        self.new_signal.emit(row, 10, ebet2["image_url"])
-                        self.new_signal.emit(row, 4, ebet2["url"])
-                    except Exception as e:
-                        print("")
-            except Exception as e:
-                print("No File detected")
+                    print("No File detected")
 
 
-            row=row+1
-        ##udah selesai
-        self.hasilnya_sinyal.emit("sudh selea")
-    
+                row=row+1
+            ##udah selesai
+            self.hasilnya_sinyal.emit("sudh selea")
+
+        elif ebet['status'] == "0":
+            self.jumlah_sinyall.emit(len(ebet['result'])+1)
+            print('hasil ebet nih'+str(len(ebet['result'])))
+            print("sini")
+
+            self.new_signal.emit(row, 1, ebet["message"])
+            self.new_signal.emit(row, 2, str(ebet["result"]))
+        
+        else:
+            self.jumlah_sinyall.emit(1)
+            self.new_signal.emit(row, 1, 'nothing')
+            pass
+
     def stop(self):
         self._isRunning = False
 
@@ -1352,8 +1351,6 @@ class Private(QDialog):
                 self.show_popup("Private Key can only be letters and numbers")
         else:
             self.show_popup("Private Key length is not eligible.\nEnter your 64 character Private Key")
-
-
 
 
     def tutup(self):

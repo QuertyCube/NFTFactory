@@ -109,6 +109,11 @@ QPushButton{
       <string>Type of</string>
      </property>
     </column>
+    <column>
+     <property name="text">
+      <string>TXID (url)</string>
+     </property>
+    </column>
    </widget>
    <widget class="QLabel" name="label_mainmenu">
     <property name="geometry">
